@@ -2,9 +2,9 @@ require "pry"
 class Player
 
 attr_accessor :name, :choice
-attr_reader :score
+attr_reader :score, :player_number
 
-  def initialize (name:, player_number:)
+  def initialize (player_number:)
     @name = name
     @player_number = player_number
     @choice = nil
@@ -14,7 +14,7 @@ attr_reader :score
 # stalls until user responds with "rock", "paper", or "scissors", and then
 # sets the choice as 0, 1 or 2, respectively.
   def make_choice
-    puts "#{@name}, please make your choice."
+    print "#{@name}, what is your choice? "
     until ["rock", "paper", "scissors"].include?(response = gets.chomp.downcase)
       puts "Please respond with 'rock', 'paper', or 'scissors'."
     end
@@ -33,4 +33,4 @@ attr_reader :score
 
 end
 
-binding.pry
+#binding.pry
