@@ -1,13 +1,15 @@
 require_relative "player.rb"
+require_relative "rulebook.rb"
 
 class Game
 
-  attr_accessor :wins_needed, :player1, :player2
+  attr_accessor :wins_needed, :player1, :player2, :rulebook
 
   def initialize
-    @wins_needed
-    @player1 = player1
-    @player2 = player2
+    @wins_needed = 0
+    @player1 = nil
+    @player2 = nil
+    @rulebook = nil
   end
 
   # creates player ojects for both players, and assigns them to the appropriate
@@ -18,7 +20,7 @@ class Game
     puts "And what is your name, Player 2?"
     @player2 = Player.new(name: gets.chomp, player_number: 2)
   end
-#------------------------------------------------------------------------
+  #------------------------------------------------------------------------
   # calls on both player objects to make their choice for the current round of play.
   def get_choices
     @player1.make_choice
@@ -145,3 +147,5 @@ class Game
     end
     puts "Thanks for playing!"
   end
+
+end
