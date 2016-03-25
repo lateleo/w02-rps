@@ -37,25 +37,25 @@ class PlayerTest < MiniTest::Test
 
   def test_increase_score_accepts_valid
     player = Player.new(player_number: 1)
-    increase_score(1)
+    player.increase_score(1)
     assert_equal(1, player.score)
   end
 
   def test_increase_score_rejects_invalid
     player = Player.new(player_number: 1)
-    increase_score(2)
+    player.increase_score(2)
     assert_equal(0, player.score)
   end
 
   def test_increase_score_rejects_tie
     player = Player.new(player_number: 1)
-    increase_score(0)
+    player.increase_score(0)
     assert_equal(0, player.score)
   end
 
   def test_reset_score
     player = Player.new(player_number: 1)
-    increase_score(1)
+    player.increase_score(1)
     player.reset_score
     assert_equal(0, player.score)
   end

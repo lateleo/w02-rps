@@ -1,8 +1,8 @@
 require "pry"
 class Player
 
-attr_accessor :name, :choice
-attr_reader :score, :player_number
+  attr_accessor :name, :choice
+  attr_reader :score, :player_number
 
   def initialize (player_number:)
     @name = name
@@ -15,7 +15,7 @@ attr_reader :score, :player_number
 # sets the choice as 0, 1 or 2, respectively.
   def make_choice
     print "#{@name}, what is your choice? "
-    until ["rock", "paper", "scissors"].include?(response = gets.chomp.downcase)
+    while !["rock", "paper", "scissors"].include?(response = gets.chomp.downcase)
       puts "Please respond with 'rock', 'paper', or 'scissors'."
     end
     @choice = ["rock", "paper", "scissors"].index(response)

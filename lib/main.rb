@@ -13,7 +13,7 @@ def get_choices(player1, player2) #uses require_rps to assign choices to both pl
   player2.make_choice
 end
 
-def equation(a, b) # generates a unique number for each possible combination of 0, 1 and 2.
+def determine_outcome(a, b) # generates a unique number for each possible combination of 0, 1 and 2.
   (a - b + 3*a*b) % 3
 end
 
@@ -32,12 +32,13 @@ end
 
 def play_single_round(player1, player2)
   get_choices(player1, player2)
-  victor_num = equation(player1.choice, player2.choice)
+  victor_num = determine_outcome(player1.choice, player2.choice)
   declare_victor(victor_num, player1, player2)
   increase_score(victor_num, player1, player2)
   victor_num
 end
 #----------------------------------------------------------------------
+
 #stalls until the given number is odd, used for determining "best of" number,
 #then outputs the number of wins needed
 def determine_number_of_wins
