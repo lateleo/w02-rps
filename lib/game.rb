@@ -49,7 +49,7 @@ class Game
   # which take the number generated from determine_outcome and checks
   # if it is the same as the player_number attribute, and if it matches,
   # increases the player's @score attribute by 1.
-  def increase_score(victor_num)
+  def increase_scores(victor_num)
     @player1.increase_score(victor_num)
     @player2.increase_score(victor_num)
   end
@@ -66,7 +66,7 @@ class Game
     get_choices
     victor_num = determine_outcome
     declare_victor(victor_num)
-    increase_score(victor_num)
+    increase_scores(victor_num)
     victor_num
   end
   #----------------------------------------------------------------------
@@ -85,7 +85,7 @@ class Game
 
   # announces the current score of both players, used after every round that doesn't end in a tie.
   def announce_current_score
-    print "After #{@player1.score + @player2.score} rounds, the scores are: "
+    print "After #{@player1.score + @player2.score} round(s), the scores are: "
     print "#{@player1.name}: #{@player1.score}, "
     puts "#{@player2.name}: #{@player2.score}"
     puts
