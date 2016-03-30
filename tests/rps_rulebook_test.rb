@@ -1,7 +1,7 @@
 require_relative "../lib/rps_rulebook.rb"
 require_relative "test_helper.rb"
 
-class Rps_rulebookTest < MiniTest::Test
+class RpsRulebookTest < MiniTest::Test
 
   def test_can_be_created_normally
     rulebook = Rps_rulebook.new
