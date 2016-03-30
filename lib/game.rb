@@ -22,17 +22,9 @@ class Game
   end
   #------------------------------------------------------------------------
   # calls on both player objects to make their choice for the current round of play.
-  def get_choices
-    @player1.make_choice
-    @player2.make_choice
-  end
-
-  # Generates a unique number for each possible combination of choices
-  # from the two player objects, and then returns that number mod 3.
-  # If the round is a tie, the number mod 3 is 0, if player1 wins,
-  # the number mod 3 is 1, and if player2 wins, the number mod 3 is 2.
-  def determine_outcome
-    (@player1.choice - @player2.choice + 3 * @player1.choice * @player2.choice) % 3
+  def get_choices(rulebook)
+    @player1.make_choice(rulebook.valid_moves)
+    @player2.make_choice(rulebook.valid_moves)
   end
 
   # Declares the victor of the current round, based on the number
@@ -62,9 +54,9 @@ class Game
   # then returns the victor_num, which has a value of 0, 1, or 2, so that the
   # play_full_set method knows whether or not to call the announce_current_score
   # method.
-  def play_single_round
+  def play_single_round(rulebook)
     get_choices
-    victor_num = determine_outcome
+    victor_num = rulebook.determine_outcome(@player1.choice, @player2.choice)
     declare_victor(victor_num)
     increase_scores(victor_num)
     victor_num
@@ -106,11 +98,11 @@ class Game
   # either player object's score is equal to wins_needed. Then, compares the
   # two player object's scores, and and anounces the winner of the set,
   # before having both player objects reset their scores to 0.
-  def play_full_set
+  def play_full_set(rulebook)
     puts "Best of how many games?"
     wins_needed = determine_number_of_wins
     until (@player1.score >= wins_needed) || (@player2.score >= wins_needed)
-      announce_current_score if play_single_round != 0
+      announce_current_score if play_single_round(rulebook) != 0
     end
     puts "#{@player1.score > @player2.score ? @player1.name : @player2.name} wins the set! \n"
     reset_scores
@@ -139,10 +131,10 @@ class Game
   # once the game and both player objects have been created.
   # Calls play_full_set at least once, and continues to do so until
   # the continue? method returns `false`, before thanking the user(s).
-  def play_full_session
+  def play_full_session(rulebook)
     keep_playing = true
     while keep_playing
-      play_full_set
+      play_full_set(rulebook)
       keep_playing = continue?
     end
     puts "Thanks for playing!"
