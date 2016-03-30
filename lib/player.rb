@@ -14,8 +14,8 @@ class Player
 
 # Asks the user to choose between "rock", "paper", or "scissors", and doesn't
 # continue until the user's response matches one of those three. Then, it sets
-# the player object's choice attribute to 0, 1, or 2, respectively, based on which
-# response the user entered.
+# the player object's choice attribute to 0, 1, or 2, respectively, based on
+# which response the user entered.
   def make_choice
     print "#{@name}, what is your choice? "
     while !@valid_moves.include?(response = gets.chomp.downcase)
