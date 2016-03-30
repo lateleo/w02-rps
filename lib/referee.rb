@@ -1,6 +1,6 @@
 require_relative "player.rb"
 
-class Rulebook
+class Referee
 
   def initialize
     @name = nil
