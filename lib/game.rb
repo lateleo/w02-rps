@@ -13,19 +13,42 @@ class Game
     @rulebook = nil
   end
 
-  # creates player ojects for both players, and assigns them to the appropriate
-  # attribute for the game object.
-  def setup
+# creates player ojects for both players, and assigns them to the appropriate
+# attribute for the game object.
+  def create_player_profiles
     puts "Welcome! Let's begin. Player 1, what is your name?"
     @player1 = Player.new(name: gets.chomp, player_number: 1)
     puts "And what is your name, Player 2?"
     @player2 = Player.new(name: gets.chomp, player_number: 2)
   end
+
+# stalls until the user responds with "traditional" or "advanced", used to determine
+# which rulebook the players want to use.
+  def require_rps_or_rpslk
+    while !["traditional", "advanced"].include?(response = gets.chomp.downcase)
+      puts "Please respond with either 'traditional' or 'advanced'."
+    end
+    response
+  end
+# Asks the user which rulebook they'd like to use, and then creates a new object
+# of the appropriate class, and sets it as the rulebook attribute for the game.
+  def determine_rulebook
+    puts "Would you like to play traditional (Rock, Paper, Scissors), or advanced (Rock, Paper, Scissors, Lizard, Spock)?"
+    require_rps_or_rpslk == "traditional" ? RpsRulebook.new : RpslkRulebook.new
+  end
+
+# Creates player objects with names, and determines which version of the game
+# is to be played.
+  def setup
+    create_player_profiles
+    @rulebook = determine_rulebook
+    rulebook.explain_rules
+  end
   #------------------------------------------------------------------------
   # calls on both player objects to make their choice for the current round of play.
-  def get_choices(rulebook)
-    @player1.make_choice(rulebook.valid_moves)
-    @player2.make_choice(rulebook.valid_moves)
+  def get_choices
+    @player1.make_choice(@rulebook)
+    @player2.make_choice(@rulebook)
   end
 
   # Declares the victor of the current round, based on the number
@@ -55,9 +78,9 @@ class Game
   # then returns the victor_num, which has a value of 0, 1, or 2, so that the
   # play_full_set method knows whether or not to call the announce_current_score
   # method.
-  def play_single_round(rulebook)
+  def play_single_round
     get_choices
-    victor_num = rulebook.determine_outcome(@player1.choice, @player2.choice)
+    victor_num = @rulebook.determine_outcome(@player1.choice, @player2.choice)
     declare_victor(victor_num)
     increase_scores(victor_num)
     victor_num
@@ -99,11 +122,11 @@ class Game
   # either player object's score is equal to wins_needed. Then, compares the
   # two player object's scores, and and anounces the winner of the set,
   # before having both player objects reset their scores to 0.
-  def play_full_set(rulebook)
+  def play_full_set
     puts "Best of how many games?"
     wins_needed = determine_number_of_wins
     until (@player1.score >= wins_needed) || (@player2.score >= wins_needed)
-      announce_current_score if play_single_round(rulebook) != 0
+      announce_current_score if play_single_round != 0
     end
     puts "#{@player1.score > @player2.score ? @player1.name : @player2.name} wins the set! \n"
     reset_scores
@@ -132,10 +155,10 @@ class Game
   # once the game and both player objects have been created.
   # Calls play_full_set at least once, and continues to do so until
   # the continue? method returns `false`, before thanking the user(s).
-  def play_full_session(rulebook)
+  def play_full_session
     keep_playing = true
     while keep_playing
-      play_full_set(rulebook)
+      play_full_set
       keep_playing = continue?
     end
     puts "Thanks for playing!"

@@ -1,6 +1,6 @@
 require_relative "player.rb"
 
-class Rpslk_rulebook
+class RpslkRulebook
   attr_reader :valid_moves, :error_message
 
   def initialize
@@ -20,4 +20,37 @@ class Rpslk_rulebook
     first_output - (2 * ((first_output - (first_output % 3)) / 3))
   end
 
+  def require_yes_no
+    while !["yes", "no"].include?(response = gets.chomp.downcase)
+      puts "Please respond with either 'yes' or 'no'."
+    end
+    response
+  end
+
+  def explain_rules
+    puts "Not many people are familiar with Rock, Paper, Scissors, Lizard, Spock. Shall I explain the rules? (y/n)"
+    if require_yes_no == "yes"
+      puts "     Rock, Paper, Scissors, Lizard, Spock (or RPSLK, for short), functions basically
+      the same as the original, but each player has two additional options, for a total of 5
+      options per player, and 25 possible combinations. The upside to RPSLK is that it's less
+      likely to result in a tie, but the downside is that it's much more complicated! The two
+      additional options, lizard and spock, have the following relationships:
+
+      Lizard:
+      - is crushed by rock (loses)
+      - eats paper (wins)
+      - is decapitated by scissors (loses)
+      - poisons spock (wins)
+      Spock:
+      - vaporizes rock (wins)
+      - is disproved by paper (loses)
+      - destroys scissors (wins)
+
+      It takes a while to learn, but you'll get the hang of it!
+      "
+    else
+      print "Ah. Veterans, I see. "
+    end
+    print "Now, then. Let's begin. "
+  end
 end

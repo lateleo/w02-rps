@@ -1,6 +1,6 @@
 require_relative "player.rb"
 
-class Rps_rulebook
+class RpsRulebook
   attr_reader :valid_moves, :error_message
 
   def initialize
@@ -16,4 +16,8 @@ class Rps_rulebook
     (player1_choice - player2_choice + 3 * player1_choice * player2_choice) % 3
   end
 
+  def explain_rules
+    print ""
+  end
+  
 end
