@@ -1,5 +1,6 @@
 require_relative "player.rb"
-require_relative "rulebook.rb"
+require_relative "rps_rulebook.rb"
+require_relative "rpslk_rulebook.rb"
 
 class Game
 
