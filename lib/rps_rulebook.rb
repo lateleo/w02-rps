@@ -1,6 +1,6 @@
 require_relative "player.rb"
 
-class Rulebook
+class Rps_rulebook
   attr_reader :valid_moves, :error_message
 
   def initialize
