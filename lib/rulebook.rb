@@ -3,7 +3,6 @@ require_relative "player.rb"
 class Rulebook
   attr_reader :valid_moves, :error_message
 
-
   def initialize
     @valid_moves = ["rock", "paper", "scissors"]
     @error_message = "Please respond with 'rock', 'paper', or 'scissors'."
