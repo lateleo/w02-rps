@@ -48,6 +48,7 @@ class Game
   # calls on both player objects to make their choice for the current round of play.
   def get_choices
     @player1.make_choice(@rulebook)
+    100.times {puts ""}
     @player2.make_choice(@rulebook)
   end
 
