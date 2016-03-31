@@ -4,7 +4,7 @@ class RpsRulebook
   attr_reader :valid_moves, :error_message
 
   def initialize
-    @valid_moves = ["rock", "paper", "scissors"]
+    @valid_moves = ["Rock", "Paper", "Scissors"]
     @error_message = "Please respond with 'rock', 'paper', or 'scissors'."
   end
 
@@ -19,5 +19,5 @@ class RpsRulebook
   def explain_rules
     print ""
   end
-  
+
 end

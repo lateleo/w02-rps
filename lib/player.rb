@@ -17,7 +17,7 @@ class Player
 # which response the user entered.
   def make_choice(rulebook)
     print "#{@name}, what is your choice? "
-    while !rulebook.valid_moves.include?(response = gets.chomp.downcase)
+    while !rulebook.valid_moves.include?(response = gets.chomp.capitalize)
       puts rulebook.error_message
     end
     @choice = rulebook.valid_moves.index(response)

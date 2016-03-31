@@ -58,7 +58,7 @@ class Game
     if victor_num == 0
       puts "Nobody wins! It's a tie! \n"
     else
-      print "\n#{victor_num == 1 ? @player1.name : @player2.name} wins the round! "
+      print "\n#{victor_num == 1 ? @rulebook.valid_moves[@player1.choice] : @rulebook.valid_moves[@player2.choice]} beats #{victor_num == 1 ? @rulebook.valid_moves[@player2.choice] : @rulebook.valid_moves[@player1.choice]}! #{victor_num == 1 ? @player1.name : @player2.name} wins the round! "
     end
   end
 
