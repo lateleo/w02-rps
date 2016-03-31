@@ -28,7 +28,7 @@ class RpslkRulebook
   end
 
   def explain_rules
-    puts "Not many people are familiar with Rock, Paper, Scissors, Lizard, Spock. Shall I explain the rules? (y/n)"
+    puts "Not many people are familiar with Rock, Paper, Scissors, Lizard, Spock. Shall I explain the rules? (yes/no)"
     if require_yes_no == "yes"
       puts "     Rock, Paper, Scissors, Lizard, Spock (or RPSLK, for short), functions basically
       the same as the original, but each player has two additional options, for a total of 5
